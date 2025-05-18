@@ -1,11 +1,87 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg: #121212;
+    --text: #ffffff;
+    --accent: #ea5700;
+    --input-bg: #1e1e1e;
+    --background-gradient: radial-gradient(circle, rgba(17, 48, 47, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    --title: #ffffff;
+    --shadow: 2px 2px 4px #000;
+    --slider: #ffffff;
+    --slider-hover: #fadccb;
+}
+
+body.light-mode {
+    --bg: #f2e1cf;
+    --text: #4c4a4a;
+    --accent: #ea5700;
+    --input-bg: #f0f0f0;
+    --main: #f0f0f0;
+    --title: #69655e;
+    --shadow: 0 0 0 #000;
+    --slider: #505050;
+    --slider-hover: #3a3a3a;
+    --background-gradient: radial-gradient(circle, rgb(255, 249, 242) 0%, rgb(223, 220, 213) 100%);
+}
+
+input[type="text"] {
+    background-color: var(--input-bg);
+    color: var(--text);
+    border: none;
+}
+
 body {
     font-family: Urbanist, sans-serif;
-    background: radial-gradient(circle,rgba(17, 48, 47, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    font-weight: 550;
     display: flex;
     justify-content: center;
     margin: 0;
     padding: 0;
+    background: var(--background-gradient);
+    color: var(--text);
+    transition: background-color 1s ease, color 1s ease;
+}
+
+.background-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    transition: opacity 1s ease;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Dunkler Hintergrund */
+#bg1 {
+    background-image: radial-gradient(circle, rgba(17, 48, 47, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    opacity: 1;
+}
+
+/* Heller Hintergrund */
+#bg2 {
+    background-image: radial-gradient(circle, rgb(254, 228, 200) 0%, rgb(223, 220, 213) 100%);
+    opacity: 0;
+}
+
+body.light-mode #bg1 {
+    opacity: 0;
+}
+
+body.light-mode #bg2 {
+    opacity: 1;
+}
+
+.title,
+.output-area,
+.slider-container,
+.checkboxes,
+.settings-row {
+    transition: color 1s ease;
 }
 
 .all {
@@ -24,13 +100,10 @@ body {
 }
 
 .main-container {
-    height: 70vh;
+    height: 60vh;
     width: 70%;
     display: flex;
     align-items: center;
-    background-color: #232221;
-    border-radius: 100px;
-    box-shadow: 0 0 19px -3px #000000
 }
 
 .output-container {
@@ -96,10 +169,10 @@ body {
 .title {
     font-size: 3rem;
     font-weight: 600;
-    color: #f0f0f0;
+    color: var(--title);
     margin-bottom: 30px;
     text-align: center;
-    text-shadow: 2px 2px 4px #000;
+    text-shadow: var(--shadow);
 }
 
 .output-area {
@@ -118,7 +191,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    color: #f0f0f0;
+    color: #ffffff;
     font-size: 1rem;
 }
 
@@ -174,18 +247,15 @@ body {
     gap: 40px;
     width: 100%;
     max-width: 800px;
-    color: #f0f0f0;
+    color: var(--text);
     font-size: 1rem;
 }
-
 
 .slider-block {
     flex: 1;
     min-width: 200px;
     margin-top: 15px;
 }
-
-
 
 .slider-block label {
     display: block;
@@ -207,7 +277,7 @@ body {
     -webkit-appearance: none;
     width: 20px;
     height: 20px;
-    background: #ffffff;
+    background: var(--slider);
     border: none;
     border-radius: 50%;
     margin-top: -7px;
@@ -217,10 +287,9 @@ body {
 
 .slider-block input[type=range]::-webkit-slider-thumb:hover {
     transform: scale(1.2);
-    background: #fadcbb;
+    background: var(--slider-hover);
 }
 
-/* Firefox */
 .slider-block input[type=range]::-moz-range-track {
     height: 6px;
     background: #f08d49;
@@ -243,10 +312,9 @@ body {
     justify-content: space-between;
     flex-wrap: nowrap;
     gap: 15px;
-    color: white;
+    color: var(--text);
     margin-top: 47px;
 }
-
 
 .checkboxes label {
     display: flex;
@@ -413,4 +481,71 @@ body {
     50% {
         transform: scale(1.2);
     }
+}
+
+.checkbox-wrapper-54 input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+}
+
+.checkbox-wrapper-54 *,
+.checkbox-wrapper-54 ::after,
+.checkbox-wrapper-54 ::before {
+    box-sizing: border-box;
+}
+
+/* The switch - the box around the slider */
+.checkbox-wrapper-54 .switch {
+    --width-of-switch: 3.5em;
+    --height-of-switch: 2em;
+    /* size of sliding icon -- sun and moon */
+    --size-of-icon: 1.4em;
+    /* it is like a inline-padding of switch */
+    --slider-offset: 0.3em;
+    position: relative;
+    width: var(--width-of-switch);
+    height: var(--height-of-switch);
+    display: inline-block;
+}
+
+/* The slider */
+.checkbox-wrapper-54 .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cdc6c0;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+.checkbox-wrapper-54 .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--size-of-icon,1.4em);
+    width: var(--size-of-icon,1.4em);
+    border-radius: 20px;
+    left: var(--slider-offset,0.3em);
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(40deg,#ff0080,#ff8c00 70%);
+;
+    transition: .4s;
+}
+
+.checkbox-wrapper-54 input:checked + .slider {
+    background-color: #303136;
+}
+
+.checkbox-wrapper-54 input:checked + .slider:before {
+    left: calc(100% - (var(--size-of-icon,1.4em) + var(--slider-offset,0.3em)));
+    background: #303136;
+    /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+    box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+}
+
+.theme-toggle-wrapper {
+    margin-top: 5px;
 }
