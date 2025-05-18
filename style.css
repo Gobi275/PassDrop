@@ -10,6 +10,8 @@
     --shadow: 2px 2px 4px #000;
     --slider: #ffffff;
     --slider-hover: #fadccb;
+    --input-field: #b7b7b3;
+    --password: #303030;
 }
 
 body.light-mode {
@@ -22,6 +24,8 @@ body.light-mode {
     --shadow: 0 0 0 #000;
     --slider: #505050;
     --slider-hover: #3a3a3a;
+    --input-field: #3b3b39;
+    --password: #e9e6e1;
     --background-gradient: radial-gradient(circle, rgb(255, 249, 242) 0%, rgb(223, 220, 213) 100%);
 }
 
@@ -120,9 +124,9 @@ body.light-mode #bg2 {
     font-size: 1.2rem;
     border: none;
     border-radius: 30px;
-    background-color: #3b3b39;
+    background-color: var(--input-field);
     outline: none;
-    color: #fff;
+    color: var(--password);
     font-family: 'JetBrains Mono', monospace;
 }
 
