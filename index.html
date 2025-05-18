@@ -7,8 +7,10 @@
     <link rel="icon" type="image/svg" href="img/icon.svg">
 </head>
 <body>
+<div class="background-layer" id="bg1"></div>
+<div class="background-layer" id="bg2"></div>
 <div class="all">
-    <img class="logo" src="img/logo.svg" alt="PassDrop Logo">
+    <img id="logo" class="logo" src="img/logo.svg" alt="PassDrop Logo">
     <div class="main-container">
         <div class="output-area">
             <div class="title">Drop dein Passwort – stark, zufällig, sicher.</div>
@@ -89,6 +91,15 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="theme-toggle-wrapper">
+        <div class="checkbox-wrapper-54">
+            <label class="switch">
+                <input type="checkbox" id="themeToggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
     </div>
 
 </div>
@@ -190,7 +201,34 @@
         });
     });
 
+    const toggle = document.getElementById("themeToggle");
+    const body = document.body;
+    const logo = document.getElementById("logo");
+
+    function updateLogoTheme() {
+        if (body.classList.contains("light-mode")) {
+            logo.src = "img/white-mode-logo.svg";
+        } else {
+            logo.src = "img/logo.svg";
+        }
+    }
+
+    // Lade Zustand aus localStorage
+    if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light-mode");
+        toggle.checked = false;
+    } else {
+        toggle.checked = true;
+    }
+    updateLogoTheme(); // ← Initialer Logo-Check
+
+    toggle.addEventListener("change", () => {
+        body.classList.toggle("light-mode");
+        localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
+        updateLogoTheme(); // ← Logo aktualisieren
+    });
 </script>
+
 
 </body>
 </html>
