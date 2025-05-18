@@ -83,6 +83,7 @@ body.light-mode #bg2 {
 .title,
 .output-area,
 .slider-container,
+#password,
 .checkboxes,
 .settings-row {
     transition: color 1s ease;
