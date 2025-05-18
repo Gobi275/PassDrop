@@ -1,0 +1,416 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    font-family: Urbanist, sans-serif;
+    background: radial-gradient(circle,rgba(17, 48, 47, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+}
+
+.logo {
+    height: 10%;
+    margin-top: 20px;
+    text-shadow: 3px 3px 5px #000;
+}
+
+.main-container {
+    height: 70vh;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    background-color: #232221;
+    border-radius: 100px;
+    box-shadow: 0 0 19px -3px #000000
+}
+
+.output-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+#password {
+    flex: 0.8;
+    padding: 12px 16px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #3b3b39;
+    outline: none;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.svg-button {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(1);
+}
+
+.btn-img.hover {
+    opacity: 0;
+}
+
+.svg-button:hover .btn-img.hover {
+    opacity: 1;
+}
+
+.svg-button:hover .btn-img.normal {
+    opacity: 0;
+}
+
+.svg-button:hover .btn-img {
+    transform: scale(1.08);
+}
+
+.svg-button:active .btn-img {
+    transform: scale(0.95);
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.output-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    padding: 20px;
+}
+
+.slider-container {
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #f0f0f0;
+    font-size: 1rem;
+}
+
+.slider-container input[type=range] {
+    width: 100%;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.slider-container input[type=range]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: #dc5c00;
+    border-radius: 3px;
+}
+
+.slider-container input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    border: 2px solid #f08d49;
+    margin-top: -7px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.slider-container input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Firefox */
+.slider-container input[type=range]::-moz-range-track {
+    height: 6px;
+    background: #f08d49;
+    border-radius: 3px;
+}
+
+.slider-container input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #f08d49;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 40px;
+    width: 100%;
+    max-width: 800px;
+    color: #f0f0f0;
+    font-size: 1rem;
+}
+
+
+.slider-block {
+    flex: 1;
+    min-width: 200px;
+    margin-top: 15px;
+}
+
+
+
+.slider-block label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.slider-block input[type=range] {
+    width: 100%;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.slider-block input[type=range]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: linear-gradient(90deg,rgba(224, 58, 20, 1) 0%, rgba(222, 167, 4, 1) 21%, rgba(47, 184, 2, 1) 100%);    border-radius: 3px;
+}
+
+.slider-block input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border: none;
+    border-radius: 50%;
+    margin-top: -7px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.slider-block input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #fadcbb;
+}
+
+/* Firefox */
+.slider-block input[type=range]::-moz-range-track {
+    height: 6px;
+    background: #f08d49;
+    border-radius: 3px;
+}
+
+.slider-block input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #f08d49;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.checkboxes {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 15px;
+    color: white;
+    margin-top: 47px;
+}
+
+
+.checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.95rem;
+}
+
+::selection {
+    background: #b54901;
+}
+
+.generate-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: auto;
+    height: auto;
+    margin-top: 50px;
+}
+
+.generate-button .btn-img {
+    display: block;
+    width: 150px;
+    height: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.generate-button .btn-img.hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.generate-button .btn-img.normal {
+    position: relative;
+    z-index: 2;
+}
+
+.generate-button:hover .btn-img.hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px #dc5a00);
+}
+
+.generate-button:hover .btn-img.normal {
+    opacity: 0;
+}
+
+.generate-button:hover .btn-img {
+    transform: scale(1.08);
+}
+
+.generate-button:active .btn-img {
+    transform: scale(0.95);
+}
+
+.copy-button .btn-img.done {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.copy-button.copied .btn-img.normal,
+.copy-button.copied .btn-img.hover {
+    display: none;
+}
+
+.copy-button.copied .btn-img.done {
+    display: block;
+}
+
+.strength-indicator {
+    width: auto;
+    height: 50px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.strength-indicator img {
+    width: auto;
+    height: 50px;
+}
+
+.checkbox-wrapper-15 .cbx {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+.checkbox-wrapper-15 .cbx span {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-15 .cbx span:first-child {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transform: scale(1);
+    vertical-align: middle;
+    border: 2px solid #bd5000;
+    transition: all 0.2s ease;
+}
+
+.checkbox-wrapper-15 .cbx span:first-child svg {
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    left: 6px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+}
+
+.checkbox-wrapper-15 .cbx span:first-child:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #FFA500;
+    display: block;
+    transform: scale(0);
+    opacity: 1;
+    border-radius: 50%;
+    transition-delay: 0.2s;
+}
+
+.checkbox-wrapper-15 .cbx:hover span:first-child {
+    border-color: #ec6202;
+}
+
+.checkbox-wrapper-15 .inp-cbx:checked + .cbx span:first-child {
+    border-color: #ea5700;
+    background: #ea5700;
+    animation: check-15 0.6s ease;
+}
+
+.checkbox-wrapper-15 .inp-cbx:checked + .cbx span:first-child svg {
+    stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-15 .inp-cbx:checked + .cbx span:first-child:before {
+    transform: scale(2.2);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+@keyframes check-15 {
+    50% {
+        transform: scale(1.2);
+    }
+}

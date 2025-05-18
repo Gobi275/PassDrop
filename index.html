@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>PassDrop•</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg" href="img/icon.svg">
+</head>
+<body>
+<div class="all">
+    <img class="logo" src="img/logo.svg" alt="PassDrop Logo">
+    <div class="main-container">
+        <div class="output-area">
+            <div class="title">Drop dein Passwort – stark, zufällig, sicher.</div>
+            <div class="output-container">
+                <input type="text" id="password" readonly>
+
+                <div class="strength-indicator">
+                    <img src="img/sehr-sicher.svg" alt="Stärkeindikator" />
+                </div>
+
+                <button onclick="copyPassword()" class="svg-button copy-button">
+                    <img src="img/copy-button.svg" class="btn-img normal" alt="Kopieren">
+                    <img src="img/copy-button-hover.svg" class="btn-img hover" alt="Kopieren Hover">
+                    <img src="img/done.svg" class="btn-img done" alt="Kopiert!">
+                </button>
+            </div>
+
+            <div class="settings-row">
+                <div class="slider-block">
+                    <label for="lengthSlider">Länge: <span id="lengthValue">12</span></label>
+                    <input type="range" min="4" max="32" value="12" id="lengthSlider">
+                </div>
+
+                <div class="checkboxes">
+                    <div class="checkbox-wrapper-15">
+                        <input class="inp-cbx rule-checkbox" id="includeNumbers" type="checkbox" checked style="display: none;" />
+                        <label class="cbx" for="includeNumbers">
+            <span>
+                <svg width="12px" height="9px" viewBox="0 0 12 9">
+                    <polyline points="1 5 4 8 11 1"></polyline>
+                </svg>
+            </span>
+                            <span>Zahlen</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-wrapper-15">
+                        <input class="inp-cbx rule-checkbox" id="includeSymbols" type="checkbox" checked style="display: none;" />
+                        <label class="cbx" for="includeSymbols">
+            <span>
+                <svg width="12px" height="9px" viewBox="0 0 12 9">
+                    <polyline points="1 5 4 8 11 1"></polyline>
+                </svg>
+            </span>
+                            <span>Sonderzeichen</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-wrapper-15">
+                        <input class="inp-cbx rule-checkbox" id="includeUppercase" type="checkbox" checked style="display: none;" />
+                        <label class="cbx" for="includeUppercase">
+            <span>
+                <svg width="12px" height="9px" viewBox="0 0 12 9">
+                    <polyline points="1 5 4 8 11 1"></polyline>
+                </svg>
+            </span>
+                            <span>Großbuchstaben</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-wrapper-15">
+                        <input class="inp-cbx rule-checkbox" id="includeLowercase" type="checkbox" checked style="display: none;" />
+                        <label class="cbx" for="includeLowercase">
+            <span>
+                <svg width="12px" height="9px" viewBox="0 0 12 9">
+                    <polyline points="1 5 4 8 11 1"></polyline>
+                </svg>
+            </span>
+                            <span>Kleinbuchstaben</span>
+                        </label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="generate-button-wrapper">
+                <button onclick="generatePassword()" class="svg-button generate-button">
+                    <img src="img/generate.svg" class="btn-img normal" alt="Generieren" />
+                    <img src="img/generate-hover.svg" class="btn-img hover" alt="Generieren Hover" />
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script>
+    function copyPassword() {
+        const input = document.getElementById("password");
+        navigator.clipboard.writeText(input.value).then(() => {
+            const button = document.querySelector(".svg-button");
+            const normalImg = button.querySelector(".btn-img.normal");
+            const hoverImg = button.querySelector(".btn-img.hover");
+
+            // Temporär auf done.svg wechseln
+            normalImg.src = "img/done.svg";
+            hoverImg.src = "img/done.svg";
+
+            setTimeout(() => {
+                normalImg.src = "img/copy-button.svg";
+                hoverImg.src = "img/copy-button-hover.svg";
+            }, 1000);
+        });
+    }
+
+    const lengthSlider = document.getElementById("lengthSlider");
+    const lengthValue = document.getElementById("lengthValue");
+
+    lengthSlider.addEventListener("input", () => {
+        lengthValue.textContent = lengthSlider.value;
+    });
+
+    function generatePassword() {
+        const length = lengthSlider.value;
+        const includeNumbers = document.getElementById("includeNumbers").checked;
+        const includeSymbols = document.getElementById("includeSymbols").checked;
+        const includeUppercase = document.getElementById("includeUppercase").checked;
+        const includeLowercase = document.getElementById("includeLowercase").checked;
+
+        const numbers = "0123456789";
+        const symbols = "!@#$%^&*()_+[]{}|;:,.<>?";
+        const lowercase = "abcdefghijklmnopqrstuvwxyz";
+        const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        let charset = "";
+        if (includeNumbers) charset += numbers;
+        if (includeSymbols) charset += symbols;
+        if (includeUppercase) charset += uppercase;
+        if (includeLowercase) charset += lowercase;
+
+        let password = "";
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset[randomIndex];
+        }
+
+        document.getElementById("password").value = password;
+        updateStrengthIndicator(password);
+    }
+
+    function updateStrengthIndicator(password) {
+        const indicator = document.querySelector(".strength-indicator img");
+
+        const hasLower = /[a-z]/.test(password);
+        const hasUpper = /[A-Z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSymbol = /[^a-zA-Z0-9]/.test(password);
+        const length = password.length;
+
+        const types = [hasLower, hasUpper, hasNumber, hasSymbol].filter(Boolean).length;
+
+        let strength = "sehr-schwach.svg";
+
+        if (types < 2 || length < 6) {
+            strength = "sehr-schwach.svg";
+        } else if (types >= 2 && length >= 6) {
+            strength = "schwach.svg";
+        }
+        if (types >= 3 && length >= 8) {
+            strength = "mittel.svg";
+        }
+        if ((types === 4 && length >= 12) || (types === 3 && length >= 14)) {
+            strength = "sicher.svg";
+        }
+        if ((types === 4 && length >= 16) || (types === 3 && length >= 18)) {
+            strength = "sehr-sicher.svg";
+        }
+
+        indicator.src = `img/${strength}`;
+    }
+
+    const checkboxes = document.querySelectorAll('.rule-checkbox');
+
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            const checkedCount = [...checkboxes].filter(c => c.checked).length;
+
+            // Wenn nur noch 1 Checkbox aktiv ist und man sie deaktivieren will, verhindere es
+            if (checkedCount === 0) {
+                cb.checked = true;
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
