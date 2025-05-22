@@ -10,100 +10,132 @@
 <div class="background-layer" id="bg1"></div>
 <div class="background-layer" id="bg2"></div>
 <div class="all">
-    <img id="logo" class="logo" src="img/logo.svg" alt="PassDrop Logo">
-    <div class="main-container">
-        <div class="output-area">
-            <div class="title">Drop dein Passwort – stark, zufällig, sicher.</div>
-            <div class="output-container">
-                <input type="text" id="password" readonly>
+    <img id="logo" class="logo" src="img/logo.svg" alt="PassDrop Logo" />
 
-                <div class="strength-indicator">
-                    <img src="img/sehr-sicher.svg" alt="Stärkeindikator" />
-                </div>
+    <!-- Tabs + Inhalt getrennt -->
+    <div class="tab-section">
+        <!-- Tab-Leiste -->
+        <div class="tab-container-wrapper">
+            <div class="tab-container">
+                <input type="radio" name="tab" id="tab1" class="tab tab--1" checked />
+                <label class="tab_label" for="tab1">Generator</label>
 
-                <button onclick="copyPassword()" class="svg-button copy-button">
-                    <img src="img/copy-button.svg" class="btn-img normal" alt="Kopieren">
-                    <img src="img/copy-button-hover.svg" class="btn-img hover" alt="Kopieren Hover">
-                    <img src="img/done.svg" class="btn-img done" alt="Kopiert!">
-                </button>
-            </div>
+                <input type="radio" name="tab" id="tab2" class="tab tab--2" />
+                <label class="tab_label" for="tab2">Inspector</label>
 
-            <div class="settings-row">
-                <div class="slider-block">
-                    <label for="lengthSlider">Länge: <span id="lengthValue">12</span></label>
-                    <input type="range" min="4" max="32" value="12" id="lengthSlider">
-                </div>
+                <input type="radio" name="tab" id="tab3" class="tab tab--3" />
+                <label class="tab_label" for="tab3">Tips</label>
 
-                <div class="checkboxes">
-                    <div class="checkbox-wrapper-15">
-                        <input class="inp-cbx rule-checkbox" id="includeNumbers" type="checkbox" checked style="display: none;" />
-                        <label class="cbx" for="includeNumbers">
-            <span>
-                <svg width="12px" height="9px" viewBox="0 0 12 9">
-                    <polyline points="1 5 4 8 11 1"></polyline>
-                </svg>
-            </span>
-                            <span>Zahlen</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-wrapper-15">
-                        <input class="inp-cbx rule-checkbox" id="includeSymbols" type="checkbox" checked style="display: none;" />
-                        <label class="cbx" for="includeSymbols">
-            <span>
-                <svg width="12px" height="9px" viewBox="0 0 12 9">
-                    <polyline points="1 5 4 8 11 1"></polyline>
-                </svg>
-            </span>
-                            <span>Sonderzeichen</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-wrapper-15">
-                        <input class="inp-cbx rule-checkbox" id="includeUppercase" type="checkbox" checked style="display: none;" />
-                        <label class="cbx" for="includeUppercase">
-            <span>
-                <svg width="12px" height="9px" viewBox="0 0 12 9">
-                    <polyline points="1 5 4 8 11 1"></polyline>
-                </svg>
-            </span>
-                            <span>Großbuchstaben</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-wrapper-15">
-                        <input class="inp-cbx rule-checkbox" id="includeLowercase" type="checkbox" checked style="display: none;" />
-                        <label class="cbx" for="includeLowercase">
-            <span>
-                <svg width="12px" height="9px" viewBox="0 0 12 9">
-                    <polyline points="1 5 4 8 11 1"></polyline>
-                </svg>
-            </span>
-                            <span>Kleinbuchstaben</span>
-                        </label>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="generate-button-wrapper">
-                <button onclick="generatePassword()" class="svg-button generate-button">
-                    <img src="img/generate.svg" class="btn-img normal" alt="Generieren" />
-                    <img src="img/generate-hover.svg" class="btn-img hover" alt="Generieren Hover" />
-                </button>
+                <div class="indicator"></div>
             </div>
         </div>
 
+        <!-- Inhalte – außerhalb der Tab-Leiste -->
+        <div class="main-container tab-content tab-content--1">
+            <div class="output-area">
+                <div class="title">Drop dein Passwort – stark, zufällig, sicher.</div>
+
+                <div class="output-container">
+                    <input type="text" id="password" readonly />
+                    <div class="strength-indicator">
+                        <img src="img/status.svg" alt="Stärkeindikator" />
+                    </div>
+                    <button onclick="copyPassword()" class="svg-button copy-button">
+                        <img src="img/copy-button.svg" class="btn-img normal" alt="Kopieren" />
+                        <img src="img/copy-button-hover.svg" class="btn-img hover" alt="Kopieren Hover" />
+                        <img src="img/done.svg" class="btn-img done" alt="Kopiert!" />
+                    </button>
+                </div>
+
+                <div class="settings-row">
+                    <div class="slider-block">
+                        <label for="lengthSlider">Länge: <span id="lengthValue">12</span></label>
+                        <input type="range" min="4" max="32" value="12" id="lengthSlider" />
+                    </div>
+
+                    <div class="checkboxes">
+                        <div class="checkbox-wrapper-15">
+                            <input class="inp-cbx rule-checkbox" id="includeNumbers" type="checkbox" checked style="display: none;" />
+                            <label class="cbx" for="includeNumbers">
+                                <span><svg width="12px" height="9px" viewBox="0 0 12 9"><polyline points="1 5 4 8 11 1"></polyline></svg></span>
+                                <span>Zahlen</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-wrapper-15">
+                            <input class="inp-cbx rule-checkbox" id="includeSymbols" type="checkbox" checked style="display: none;" />
+                            <label class="cbx" for="includeSymbols">
+                                <span><svg width="12px" height="9px" viewBox="0 0 12 9"><polyline points="1 5 4 8 11 1"></polyline></svg></span>
+                                <span>Sonderzeichen</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-wrapper-15">
+                            <input class="inp-cbx rule-checkbox" id="includeUppercase" type="checkbox" checked style="display: none;" />
+                            <label class="cbx" for="includeUppercase">
+                                <span><svg width="12px" height="9px" viewBox="0 0 12 9"><polyline points="1 5 4 8 11 1"></polyline></svg></span>
+                                <span>Großbuchstaben</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-wrapper-15">
+                            <input class="inp-cbx rule-checkbox" id="includeLowercase" type="checkbox" checked style="display: none;" />
+                            <label class="cbx" for="includeLowercase">
+                                <span><svg width="12px" height="9px" viewBox="0 0 12 9"><polyline points="1 5 4 8 11 1"></polyline></svg></span>
+                                <span>Kleinbuchstaben</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="generate-button-wrapper">
+                    <button onclick="generatePassword()" class="svg-button generate-button">
+                        <img src="img/generate.svg" class="btn-img normal" alt="Generieren" />
+                        <img src="img/generate-hover.svg" class="btn-img hover" alt="Generieren Hover" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container tab-content tab-content--2">
+            <div class="output-area inspector-area">
+                <div class="title">Dein Passwort im Test</div>
+
+                <div class="output-container inspector-input-row">
+                    <input type="password" id="inspectInput" placeholder="Gib hier dein Passwort ein…"  />
+                </div>
+
+                <div class="advise">🔒 Dein Passwort wird ausschließlich lokal geprüft.</div>
+
+                <div class="score">
+                    <div class="loader">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="main-container tab-content tab-content--3">
+            <div class="placeholder">
+                <h2>💡 Tipps</h2>
+                <p>Hier findest du bald clevere Tipps rund ums Passwort! 🧠</p>
+            </div>
+        </div>
     </div>
 
+    <!-- Theme Toggle -->
     <div class="theme-toggle-wrapper">
         <div class="checkbox-wrapper-54">
             <label class="switch">
-                <input type="checkbox" id="themeToggle" checked>
+                <input type="checkbox" id="themeToggle" checked />
                 <span class="slider"></span>
             </label>
         </div>
     </div>
-
 </div>
+
+
 <script>
+    let currentTabIndex = 1;
+
     function copyPassword() {
         const input = document.getElementById("password");
         navigator.clipboard.writeText(input.value).then(() => {
@@ -178,10 +210,10 @@
         if (types >= 3 && length >= 8) {
             strength = "mittel.svg";
         }
-        if ((types === 4 && length >= 12) || (types === 3 && length >= 14)) {
+        if ((types === 4 && length >= 11) || (types === 3 && length >= 14)) {
             strength = "sicher.svg";
         }
-        if ((types === 4 && length >= 16) || (types === 3 && length >= 18)) {
+        if ((types === 4 && length >= 14) || (types === 3 && length >= 16)) {
             strength = "sehr-sicher.svg";
         }
 
@@ -227,6 +259,50 @@
         localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
         updateLogoTheme(); // ← Logo aktualisieren
     });
+
+    const tabRadios = document.querySelectorAll('input[name="tab"]');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function updateTabs() {
+        // Zuerst alle Inhalte verstecken und Animation resetten
+        tabContents.forEach(content => {
+            content.style.display = 'none';
+            content.style.transition = '';
+            content.style.opacity = '';
+            content.style.transform = '';
+        });
+
+        const activeId = document.querySelector('input[name="tab"]:checked').id;
+        const newIndex = parseInt(activeId.replace('tab', ''));
+        const activeContent = document.querySelector(`.tab-content--${newIndex}`);
+
+        if (activeContent) {
+            const directionClass = newIndex > currentTabIndex ? 'right' : 'left';
+
+            // Startzustand setzen
+            activeContent.style.display = 'flex';
+            activeContent.style.opacity = '0';
+            activeContent.style.transform = directionClass === 'right' ? 'translateX(60px)' : 'translateX(-60px)';
+
+            // Animieren
+            requestAnimationFrame(() => {
+                activeContent.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                activeContent.style.opacity = '1';
+                activeContent.style.transform = 'translateX(0)';
+            });
+
+            // NICHT opacity/transform resetten – das bleibt sichtbar!
+            currentTabIndex = newIndex;
+        }
+    }
+
+
+    tabRadios.forEach(radio => {
+        radio.addEventListener('change', updateTabs);
+    });
+
+    updateTabs(); // Initial beim Laden
+
 </script>
 
 
