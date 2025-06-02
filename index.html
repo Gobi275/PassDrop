@@ -102,7 +102,7 @@
                     <input type="password" id="inspectInput" placeholder="Gib hier dein Passwort ein…"  />
                 </div>
 
-                <div class="advise">🔒 Dein Passwort wird ausschließlich lokal geprüft.</div>
+                <div class="advise" id="adviseText">🔒 Sicherheitsinformationen</div>
 
                 <div class="score">
                     <div class="loader">
@@ -114,10 +114,26 @@
 
 
         <div class="main-container tab-content tab-content--3">
-            <div class="placeholder">
-                <h2>💡 Tipps</h2>
-                <p>Hier findest du bald clevere Tipps rund ums Passwort! 🧠</p>
+            <div class="heading">
+                <img src="img/tips.png" class="icon-big" alt="Tips" />
+                <h2 class="tips-title">Tips</h2>
             </div>
+            <div class="tips-over-container">
+                <div class="tips-container">
+                    <img id="twofaIcon" src="img/2fa.png" class="tips-icon" alt="2FA" />
+                    <img id="personalIcon" src="img/personal-info.png" class="tips-icon" alt="Keine persönlichen Daten" />
+                    <img id="wordsIcon" src="img/words.png" class="tips-icon" alt="Vermeide bekannte Wörter" />
+                    <img id="pwmanagerIcon" src="img/passwordmanager.png" class="tips-icon" alt="Passwortmanager" />
+                    <img id="keysIcon" src="img/keys.png" class="tips-icon" alt="Eigene Passwörter je Dienst" />
+                </div>
+                <div class="tips-container">
+                    <img id="atwoIcon" src="img/a2.png" class="tips-icon" alt="Alle Zeichenarten nutzen" />
+                    <img id="calendarIcon" src="img/calendar.png" class="tips-icon" alt="Nur bei Bedarf ändern" />
+                    <img id="phraseIcon" src="img/passphrase.png" class="tips-icon" alt="Passphrasen verwenden" />
+                    <img id="qwertzIcon" src="img/qwertz.png" class="tips-icon" alt="Muster & Wiederholungen vermeiden" />
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -132,6 +148,33 @@
     </div>
 </div>
 
+<div id="privacyModal" class="modal">
+    <div class="modal-content">
+        <button class="close-button" id="closePrivacy">
+            <img src="img/close.svg" class="close-img normal" alt="Schließen">
+            <img src="img/close-hover.svg" class="close-img hover" alt="Schließen Hover">
+        </button>
+        <img src="img/icon01.svg" class="modal-icon" alt="shield icon">
+        <h2>Deine Privatsphäre zählt</h2>
+        <p>
+            Dein Passwort verlässt niemals deinen Browser. <br>
+            Es wird nicht gespeichert, gesendet oder analysiert. <br>
+            Alles passiert lokal auf deinem Gerät.
+        </p>
+    </div>
+</div>
+
+<div id="tipModal" class="modal">
+    <div class="modal-content">
+        <button class="close-button" id="closeTip">
+            <img src="img/close.svg" class="close-img normal" alt="Schließen">
+            <img src="img/close-hover.svg" class="close-img hover" alt="Schließen Hover">
+        </button>
+        <img id="modalIcon" class="modal-icon" alt="Tipp-Icon">
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+    </div>
+</div>
 
 <script>
     let currentTabIndex = 1;
@@ -301,7 +344,103 @@
         radio.addEventListener('change', updateTabs);
     });
 
-    updateTabs(); // Initial beim Laden
+    updateTabs();
+
+    const tipData = {
+        twofa: {
+            icon: "img/2fa.png",
+            title: "Nutze 2‑Faktor‑Authentifizierung",
+            text: "Selbst wenn dein Passwort geknackt wird, schützt 2FA dein Konto zusätzlich."
+        },
+        personal: {
+            icon: "img/personal-info.png",
+            title: "Keine persönlichen Daten",
+            text: "Geburtsdaten, Namen, Wohnorte oder Hobbys sind leicht zu erraten oder zu finden."
+        },
+        words: {
+            icon: "img/words.png",
+            title: "Vermeide bekannte Wörter",
+            text: "Wörter wie „Passwort123“ oder „qwertz“ sind unsicher."
+        },
+        pwmanager: {
+            icon: "img/passwordmanager.png",
+            title: "Passwörter sicher speichern",
+            text: "Verwende einen Passwortmanager – niemals Zettel oder unverschlüsselte Dateien."
+        },
+        keys: {
+            icon: "img/keys.png",
+            title: "Für jeden Dienst ein Passwort",
+            text: "So bleiben andere Konten sicher, selbst wenn eines gehackt wird."
+        },
+        atwo: {
+            icon: "img/a2.png",
+            title: "Alle Zeichenarten nutzen",
+            text: "Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen erhöhen die Sicherheit."
+        },
+        calendar: {
+            icon: "img/calendar.png",
+            title: "Nur bei Bedarf ändern",
+            text: "Regelmäßiges Ändern schwächt oft die Qualität. Ändere nur bei Verdacht."
+        },
+        phrase: {
+            icon: "img/passphrase.png",
+            title: "Passphrasen verwenden",
+            text: "„Gelbe-TigerTanzt!2025“ ist sicher UND leicht zu merken."
+        },
+        qwertz: {
+            icon: "img/qwertz.png",
+            title: "Vermeide Muster & Wiederholungen",
+            text: "Tastenkombis oder „aaaaaa“ sind vorhersehbar und unsicher."
+        }
+    };
+
+    function openTipModal(key) {
+        const data = tipData[key];
+        if (!data) return;
+
+        document.getElementById("modalIcon").src = data.icon;
+        document.getElementById("modalTitle").textContent = data.title;
+        document.getElementById("modalText").textContent = data.text;
+
+        document.getElementById("tipModal").style.display = "block";
+    }
+
+    document.querySelectorAll(".tips-icon").forEach(icon => {
+        icon.addEventListener("click", () => {
+            const id = icon.id.replace("Icon", ""); // z. B. twofaIcon → twofa
+            openTipModal(id);
+        });
+    });
+
+    // Beispiel: Events registrieren
+    document.getElementById("twofaIcon").addEventListener("click", () => openTipModal("twofa"));
+    document.getElementById("wordsIcon").addEventListener("click", () => openTipModal("words"));
+    // … und so weiter
+
+    // ---- Modal Logic ----
+
+    // Privacy Modal öffnen & schließen
+    document.getElementById("adviseText").addEventListener("click", () => {
+        document.getElementById("privacyModal").style.display = "block";
+    });
+    document.getElementById("closePrivacy").addEventListener("click", () => {
+        document.getElementById("privacyModal").style.display = "none";
+    });
+
+    // Tip Modal schließen
+    document.getElementById("closeTip").addEventListener("click", () => {
+        document.getElementById("tipModal").style.display = "none";
+    });
+
+    // Schließen durch Klick neben das Modal
+    document.querySelectorAll(".modal").forEach(modal => {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+
 
 </script>
 
