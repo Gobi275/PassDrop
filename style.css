@@ -22,6 +22,7 @@
     --switcher-hover: #ffffff;
     --switcher-text: #7b7b7b;
     --switcher-border: rgba(0, 0, 0, 0.6);
+    --tiptitle: rgb(231, 215, 181);
 }
 
 body.light-mode {
@@ -42,6 +43,7 @@ body.light-mode {
     --switcher-hover: #ffffff;
     --switcher-text: #616161;
     --switcher-border: rgba(255, 255, 255, 0.6);
+    --tiptitle: rgb(62, 54, 116);
 }
 
 input[type="text"] {
@@ -679,13 +681,6 @@ body.light-mode #bg2 {
     display: block !important;
 }
 
-.placeholder {
-    color: var(--switcher-text);
-    font-size: 1rem;
-    padding: 2rem;
-    text-align: center;
-}
-
 .tab-container-wrapper {
     display: flex;
     justify-content: center;
@@ -801,6 +796,14 @@ body.light-mode #bg2 {
 .advise {
     color: #968f85;
     font-weight: 400;
+    text-decoration: underline;
+}
+
+.advise:hover {
+    font-size: 1.02rem;
+    transition: 0.2s;
+    cursor: pointer;
+    color: var(--input-field);
 }
 
 .crack-time-box {
@@ -873,4 +876,196 @@ body.light-mode #bg2 {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    width: 80vh;
+    height: 66vh;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 40px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 30px;
+    color: var(--text);
+    text-align: center;
+}
+
+body.light-mode .modal {
+    background: rgba(241, 232, 222, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-content h2 {
+    font-size: 3rem;
+}
+
+.modal-content p {
+    font-size: 1.2rem;
+}
+
+.modal-icon {
+    height: 22vh;
+}
+
+.close-button {
+    position: absolute;
+    top: 18px;
+    right: 25px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text);
+    opacity: 0.6;
+    transition: transform 220ms ease, opacity 220ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.close-button:hover {
+    opacity: 1;
+    rotate: 90deg;
+    transition: 220ms;
+    transform: scale(1.2);
+}
+
+.icon-big {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    shape-rendering: geometricPrecision;
+    display: block;
+    margin: 0 auto;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    color: var(--tiptitle);
+    font-size: 1rem;
+    padding: 2rem;
+    text-align: center;
+    gap: 1rem;
+}
+
+.tips-title {
+    font-size: 2.8rem;
+}
+
+.tips-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.tips-icon {
+    width: auto;
+    max-width: 80px;
+    height: auto;
+    max-height: 80px;
+    transition: 225ms ease-in-out;
+}
+
+.tips-icon:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.tips-icon:active {
+    transform: scale(0.9) translateY(5px);
+}
+
+.tips-over-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-icon {
+    width: 20%;
+    height: auto;
+}
+
+.modal-content {
+    animation: zoomIn 0.25s ease;
+    transform-origin: center center;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.94);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.close-button .close-img {
+    width: 20px;
+    height: 20px;
+    display: none;
+    transition: transform 0.2s ease;
+}
+
+.close-button .close-img.normal {
+    display: inline-block;
+}
+
+.close-button:hover .close-img.normal {
+    display: none;
+}
+
+.close-button:hover .close-img.hover {
+    display: inline-block;
+}
+
+.close-button:active {
+    transform: scale(0.9);
 }
