@@ -106,9 +106,14 @@
 
                 <div class="score">
                     <div class="loader">
+                        <div class="score-inner">
+                            <div id="scoreValue">0</div>
+                            <div id="scoreLabel">Bewerten…</div>
+                        </div>
                         <span></span>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -178,6 +183,8 @@
 
 <script>
     let currentTabIndex = 1;
+    const soundTabSwitch = new Audio('sounds/tabswitch.wav');
+    soundTabSwitch.volume = 0.1; // Optional: etwas leiser
 
     function copyPassword() {
         const input = document.getElementById("password");
@@ -185,10 +192,14 @@
             const button = document.querySelector(".svg-button");
             const normalImg = button.querySelector(".btn-img.normal");
             const hoverImg = button.querySelector(".btn-img.hover");
+            const soundCopy = new Audio('sounds/copy.mp3')
 
             // Temporär auf done.svg wechseln
             normalImg.src = "img/done.svg";
             hoverImg.src = "img/done.svg";
+
+            soundCopy.volume = 0.08;
+            soundCopy.play();
 
             setTimeout(() => {
                 normalImg.src = "img/copy-button.svg";
@@ -215,6 +226,7 @@
         const symbols = "!@#$%^&*()_+[]{}|;:,.<>?";
         const lowercase = "abcdefghijklmnopqrstuvwxyz";
         const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const generateSound = new Audio('sounds/generate.mp3');
 
         let charset = "";
         if (includeNumbers) charset += numbers;
@@ -227,6 +239,9 @@
             const randomIndex = Math.floor(Math.random() * charset.length);
             password += charset[randomIndex];
         }
+
+        generateSound.volume = 0.1;
+        generateSound.play();
 
         document.getElementById("password").value = password;
         updateStrengthIndicator(password);
@@ -263,12 +278,68 @@
         indicator.src = `img/${strength}`;
     }
 
+    const inspectInput = document.getElementById("inspectInput");
+    const scoreValue = document.getElementById("scoreValue");
+    const scoreLabel = document.getElementById("scoreLabel");
+    const loaderSpan = document.querySelector(".loader span");
+
+    inspectInput.addEventListener("input", () => {
+        const pw = inspectInput.value;
+        const score = calculatePasswordScore(pw); // Wert 0–100
+        updateSecurityScore(score);
+    });
+
+    function calculatePasswordScore(pw) {
+        let score = 0;
+        if (!pw) return 0;
+
+        const hasLower = /[a-z]/.test(pw);
+        const hasUpper = /[A-Z]/.test(pw);
+        const hasNumber = /[0-9]/.test(pw);
+        const hasSymbol = /[^a-zA-Z0-9]/.test(pw);
+
+        const length = pw.length;
+        const types = [hasLower, hasUpper, hasNumber, hasSymbol].filter(Boolean).length;
+
+        score += length * 4;
+        score += types * 10;
+
+        if (length < 8) score -= 15;
+        if (types < 2) score -= 10;
+
+        return Math.min(Math.max(score, 0), 100); // Clampen
+    }
+
+    function updateSecurityScore(score) {
+        scoreValue.textContent = score;
+
+        let label = "Sehr schwach";
+        let color = "#ff3e3e";
+
+        if (score > 80) {
+            label = "Exzellent";
+            color = "#00d26a";
+        } else if (score > 60) {
+            label = "Stark";
+            color = "#5fd200";
+        } else if (score > 40) {
+            label = "Mittel";
+            color = "#ffb400";
+        } else if (score > 20) {
+            label = "Schwach";
+            color = "#ff6d00";
+        }
+
+        scoreLabel.textContent = label;
+
+        loaderSpan.style.backgroundImage = `conic-gradient(${color} ${score}%, transparent ${score}%)`;
+    }
+
     const checkboxes = document.querySelectorAll('.rule-checkbox');
 
     checkboxes.forEach(cb => {
         cb.addEventListener('change', () => {
             const checkedCount = [...checkboxes].filter(c => c.checked).length;
-
             // Wenn nur noch 1 Checkbox aktiv ist und man sie deaktivieren will, verhindere es
             if (checkedCount === 0) {
                 cb.checked = true;
@@ -281,6 +352,9 @@
     const logo = document.getElementById("logo");
 
     function updateLogoTheme() {
+        const toggleSound = new Audio('sounds/toggle.mp3');
+        toggleSound.volume = 0.02;
+        toggleSound.play();
         if (body.classList.contains("light-mode")) {
             logo.src = "img/white-mode-logo.svg";
         } else {
@@ -300,7 +374,7 @@
     toggle.addEventListener("change", () => {
         body.classList.toggle("light-mode");
         localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
-        updateLogoTheme(); // ← Logo aktualisieren
+        updateLogoTheme();
     });
 
     const tabRadios = document.querySelectorAll('input[name="tab"]');
@@ -322,6 +396,8 @@
         if (activeContent) {
             const directionClass = newIndex > currentTabIndex ? 'right' : 'left';
 
+            soundTabSwitch.currentTime = 0;
+            soundTabSwitch.play();
             // Startzustand setzen
             activeContent.style.display = 'flex';
             activeContent.style.opacity = '0';
@@ -355,7 +431,7 @@
         personal: {
             icon: "img/personal-info.png",
             title: "Keine persönlichen Daten",
-            text: "Geburtsdaten, Namen, Wohnorte oder Hobbys sind leicht zu erraten oder zu finden."
+            text: "Geburtsdaten, Namen, Wohnorte oder Hobbys sind leicht zu erraten oder zu finden. Verwende niemals private Informationen in Passwörtern, auch wenn sie leichter zu merken sind."
         },
         words: {
             icon: "img/words.png",
@@ -365,7 +441,7 @@
         pwmanager: {
             icon: "img/passwordmanager.png",
             title: "Passwörter sicher speichern",
-            text: "Verwende einen Passwortmanager – niemals Zettel oder unverschlüsselte Dateien."
+            text: "Verwende einen Passwortmanager – niemals Zettel oder unverschlüsselte Dateien. Doch auch hier musst du aufpassen: Nicht alle Passwortgeneratoren gehen gut mit deinen Passwörtern um. Wir empfehlen den Passwortmanager von Google."
         },
         keys: {
             icon: "img/keys.png",
@@ -415,11 +491,7 @@
     // Beispiel: Events registrieren
     document.getElementById("twofaIcon").addEventListener("click", () => openTipModal("twofa"));
     document.getElementById("wordsIcon").addEventListener("click", () => openTipModal("words"));
-    // … und so weiter
 
-    // ---- Modal Logic ----
-
-    // Privacy Modal öffnen & schließen
     document.getElementById("adviseText").addEventListener("click", () => {
         document.getElementById("privacyModal").style.display = "block";
     });
