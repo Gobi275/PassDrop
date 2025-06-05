@@ -23,6 +23,7 @@
     --switcher-text: #7b7b7b;
     --switcher-border: rgba(0, 0, 0, 0.6);
     --tiptitle: rgb(231, 215, 181);
+    --primary: rgb(26, 43, 41);
 }
 
 body.light-mode {
@@ -37,6 +38,7 @@ body.light-mode {
     --slider-hover: #3a3a3a;
     --input-field: #3b3b39;
     --password: #e9e6e1;
+    --primary: rgb(245, 225, 199);
     --background-gradient: radial-gradient(circle, rgb(255, 249, 242) 0%, rgb(223, 220, 213) 100%);
     --switcher: #fffdfb;
     --switcher-bg: rgba(255, 245, 238, 0.47);
@@ -546,7 +548,7 @@ body.light-mode #bg2 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #cdc6c0;
+    background-color: #d3c3b3;
     transition: .4s;
     border-radius: 30px;
 }
@@ -823,7 +825,7 @@ body.light-mode #bg2 {
     position: relative;
     width: 200px;
     height: 200px;
-    border: 4px solid #f9e3c9;
+    border: 4px solid var(--primary);
     overflow: hidden;
     border-radius: 50%;
     box-shadow:
@@ -841,11 +843,11 @@ body.light-mode #bg2 {
     right: 16px;
     bottom: 16px;
     z-index: 10;
-    background: #f7e2c8;
+    background: var(--primary);
     border-radius: 50%;
-    border: 2px solid #f5e1c7;
+    border: 2px solid var(--primary);
     box-shadow:
-            inset -2px -2px 5px rgb(255, 241, 224),
+            inset -2px -2px 5px var(--primary),
             inset 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -866,6 +868,7 @@ body.light-mode #bg2 {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-image 0.3s ease;
 }
 
 @keyframes animate {
@@ -1009,6 +1012,7 @@ body.light-mode .modal {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 5rem;
 }
 
 .modal-icon {
@@ -1068,4 +1072,51 @@ body.light-mode .modal {
 
 .close-button:active {
     transform: scale(0.9);
+}
+
+.score-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text);
+    text-align: center;
+    z-index: 20;
+    font-family: 'Urbanist', sans-serif;
+}
+
+#scoreValue {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: var(--text);
+}
+
+#scoreLabel {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.flip-number {
+    position: relative;
+    display: inline-block;
+    height: 2.6rem;
+    overflow: hidden;
+}
+
+.flip-number span {
+    display: block;
+    animation: flipUp 0.4s ease;
+    will-change: transform, opacity;
+}
+
+@keyframes flipUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
 }
