@@ -1097,26 +1097,19 @@ body.light-mode .modal {
     margin-top: 4px;
 }
 
-.flip-number {
-    position: relative;
-    display: inline-block;
-    height: 2.6rem;
-    overflow: hidden;
+.score-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
 }
 
-.flip-number span {
-    display: block;
-    animation: flipUp 0.4s ease;
-    will-change: transform, opacity;
+.crack-time {
+    font-size: 2rem;
+    color: var(--text);
 }
 
-@keyframes flipUp {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0%);
-        opacity: 1;
-    }
+.crack-time span {
+    font-weight: 700;
 }
