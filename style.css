@@ -24,6 +24,8 @@
     --switcher-border: rgba(0, 0, 0, 0.6);
     --tiptitle: rgb(231, 215, 181);
     --primary: rgb(26, 43, 41);
+    --modal-bg: rgba(28, 32, 35, 0.69);
+    --modal-border: rgba(105, 130, 159, 0.25);
 }
 
 body.light-mode {
@@ -45,7 +47,7 @@ body.light-mode {
     --switcher-hover: #ffffff;
     --switcher-text: #616161;
     --switcher-border: rgba(255, 255, 255, 0.6);
-    --tiptitle: rgb(62, 54, 116);
+    --tiptitle: rgb(36, 54, 94);
 }
 
 input[type="text"] {
@@ -890,8 +892,8 @@ body.light-mode #bg2 {
     width: 80vh;
     height: 66vh;
     transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: var(--modal-bg);
+    border: 1px solid var(--modal-border);
     border-radius: 40px;
     backdrop-filter: blur(16px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
@@ -1106,10 +1108,12 @@ body.light-mode .modal {
 }
 
 .crack-time {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--text);
 }
 
 .crack-time span {
     font-weight: 700;
+    font-size: 3.2rem;
+    color: var(--tiptitle);
 }
