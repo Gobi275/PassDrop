@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="crack-time">
-                        Knackzeit: <span id="crackTime">–</span>
+                        Knackzeit: <br><span id="crackTime">–</span>
                     </div>
                 </div>
 
@@ -274,7 +274,7 @@
         if (types >= 3 && length >= 8) {
             strength = "mittel.svg";
         }
-        if ((types === 4 && length >= 11) || (types === 3 && length >= 14)) {
+        if ((types === 4 && length >= 11) || (types === 3 && length >= 12)) {
             strength = "sicher.svg";
         }
         if ((types === 4 && length >= 14) || (types === 3 && length >= 16)) {
@@ -336,13 +336,13 @@
         const length = pw.length;
         const types = [hasLower, hasUpper, hasNumber, hasSymbol].filter(Boolean).length;
 
-        score += length * 4;
-        score += types * 10;
+        score += length * 5;
+        score += types * 12;
 
-        if (length < 8) score -= 15;
-        if (types < 2) score -= 10;
+        if (length < 8) score -= 12;
+        if (types < 2) score -= 9;
 
-        return Math.min(Math.max(score, 0), 100); // Clampen
+        return Math.min(Math.max(score, 0), 100);
     }
 
     function updateSecurityScore(score) {
@@ -461,47 +461,47 @@
         twofa: {
             icon: "img/2fa.png",
             title: "Nutze 2‑Faktor‑Authentifizierung",
-            text: "Selbst wenn dein Passwort geknackt wird, schützt 2FA dein Konto zusätzlich."
+            text: "2‑Faktor‑Authentifizierung (2FA) fügt eine zusätzliche Schutzebene hinzu. Selbst wenn ein Angreifer dein Passwort herausfindet, kommt er ohne den zweiten Faktor – z. B. einen Code auf deinem Handy – nicht in dein Konto. Besonders bei sensiblen Diensten wie E-Mail oder Online-Banking ist 2FA ein Muss."
         },
         personal: {
             icon: "img/personal-info.png",
             title: "Keine persönlichen Daten",
-            text: "Geburtsdaten, Namen, Wohnorte oder Hobbys sind leicht zu erraten oder zu finden. Verwende niemals private Informationen in Passwörtern, auch wenn sie leichter zu merken sind."
+            text: "Viele Menschen verwenden in Passwörtern Namen, Geburtstage oder Hobbys. Solche Daten sind leicht herauszufinden – über soziale Netzwerke oder Datenlecks. Ein sicheres Passwort darf keinen Bezug zu deiner Person haben. Je zufälliger, desto besser!"
         },
         words: {
             icon: "img/words.png",
             title: "Vermeide bekannte Wörter",
-            text: "Wörter wie „Passwort123“ oder „qwertz“ sind unsicher."
+            text: "Angreifer nutzen sogenannte Wörterbuchangriffe. Dabei probieren sie Millionen von häufig verwendeten Wörtern und Kombinationen durch. Wörter wie 'Passwort123', 'qwertz' oder 'letmein' stehen ganz oben auf der Liste. Verwende besser zufällige Zeichenfolgen oder Passphrasen."
         },
         pwmanager: {
             icon: "img/passwordmanager.png",
             title: "Passwörter sicher speichern",
-            text: "Verwende einen Passwortmanager – niemals Zettel oder unverschlüsselte Dateien. Doch auch hier musst du aufpassen: Nicht alle Passwortgeneratoren gehen gut mit deinen Passwörtern um. Wir empfehlen den Passwortmanager von Google."
+            text: "Ein Passwortmanager hilft dir, komplexe und einzigartige Passwörter für jeden Dienst zu verwenden – ohne sie dir merken zu müssen. Vermeide unbedingt Notizen auf Papier oder Dateien wie 'Passwort.txt'. Gute Passwortmanager verschlüsseln deine Daten und machen das Leben sicherer und einfacher."
         },
         keys: {
             icon: "img/keys.png",
             title: "Für jeden Dienst ein Passwort",
-            text: "So bleiben andere Konten sicher, selbst wenn eines gehackt wird."
+            text: "Wenn du überall dasselbe Passwort verwendest, reicht ein einziger Datenleck, um all deine Konten zu gefährden. Verwende für jeden Dienst ein einzigartiges Passwort – besonders für E-Mail, Online-Shopping und soziale Netzwerke."
         },
         atwo: {
             icon: "img/a2.png",
             title: "Alle Zeichenarten nutzen",
-            text: "Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen erhöhen die Sicherheit."
+            text: "Ein starkes Passwort enthält Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen. Dadurch erhöht sich die Anzahl möglicher Kombinationen drastisch, was automatisierte Angriffe (wie Brute Force) deutlich erschwert."
         },
         calendar: {
             icon: "img/calendar.png",
             title: "Nur bei Bedarf ändern",
-            text: "Regelmäßiges Ändern schwächt oft die Qualität. Ändere nur bei Verdacht."
+            text: "Früher galt: Passwörter regelmäßig ändern. Heute weiß man: Häufige Änderungen führen zu schwachen oder vorhersehbaren Passwörtern. Besser: Nur bei Verdacht auf Missbrauch ändern – aber dann ein komplett neues, starkes Passwort wählen."
         },
         phrase: {
             icon: "img/passphrase.png",
             title: "Passphrasen verwenden",
-            text: "„Gelbe-TigerTanzt!2025“ ist sicher UND leicht zu merken."
+            text: "Eine Passphrase ist eine Kombination mehrerer Wörter – z. B. 'Gelbe-TigerTanzt!2025'. Sie ist lang, schwer zu erraten und gleichzeitig leicht zu merken. In vielen Fällen sicherer und benutzerfreundlicher als ein komplexes, kurzes Passwort."
         },
         qwertz: {
             icon: "img/qwertz.png",
             title: "Vermeide Muster & Wiederholungen",
-            text: "Tastenkombis oder „aaaaaa“ sind vorhersehbar und unsicher."
+            text: "Tastaturmuster wie 'qwertz', 'asdfgh' oder Wiederholungen wie '444444' sind sehr beliebt – und genauso leicht zu knacken. Solche Passwörter sind in jeder Hacking-Datenbank enthalten. Nutze stattdessen Zufall oder kreative Wortkombinationen."
         }
     };
 
@@ -556,6 +556,7 @@
 
 
 </script>
+
 
 </body>
 </html>
