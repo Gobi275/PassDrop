@@ -159,6 +159,24 @@
     </div>
 </div>
 
+<footer class="copyright">
+    <div class="cp1">Made with 💡 by Gobi275</div>
+
+    <div class="cp2-wrapper">
+        <div class="cp2">© Alle Rechte vorbehalten</div>
+
+        <!-- Tooltip-Karte -->
+        <div class="tooltip-card">
+            <h3>Rechtlicher Hinweis</h3>
+            <p>Name, Logo und Design sind urheberrechtlich geschützt.</p>
+            <p class="tooltip-note">Nur zur privaten Nutzung.</p>
+            <div class="tooltip-glow"></div>
+        </div>
+    </div>
+</footer>
+
+
+
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <button class="close-button" id="closePrivacy">
@@ -539,7 +557,6 @@
         document.getElementById("tipModal").style.display = "none";
     });
 
-    // Schließen durch Klick neben das Modal
     document.querySelectorAll(".modal").forEach(modal => {
         modal.addEventListener("click", (e) => {
             if (e.target === modal) {
@@ -554,9 +571,7 @@
         document.getElementById("crackTime").textContent = time;
     });
 
-
 </script>
-
 
 </body>
 </html>
