@@ -1116,4 +1116,5 @@ body.light-mode .modal {
     font-weight: 700;
     font-size: 3.2rem;
     color: var(--tiptitle);
+    line-height: 5rem;
 }
