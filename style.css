@@ -26,6 +26,8 @@
     --primary: rgb(26, 43, 41);
     --modal-bg: rgba(28, 32, 35, 0.69);
     --modal-border: rgba(105, 130, 159, 0.25);
+    --copyright: #c6bb9f;
+    --copyright-bg: rgba(255, 255, 255, 0.45);
 }
 
 body.light-mode {
@@ -48,6 +50,8 @@ body.light-mode {
     --switcher-text: #616161;
     --switcher-border: rgba(255, 255, 255, 0.6);
     --tiptitle: rgb(36, 54, 94);
+    --copyright: #404b63;
+    --copyright-bg: rgba(0, 0, 0, 0.45);
 }
 
 input[type="text"] {
@@ -739,7 +743,7 @@ body.light-mode #bg2 {
     border-radius: 50px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
 
-    margin-top: 4rem;
+    margin-top: 3rem;
     margin-bottom: 4rem;
 }
 
@@ -753,7 +757,7 @@ body.light-mode #bg2 {
 .tab-content.active {
     display: flex;
     opacity: 1;
-    transform: translateX(0); /* <– NEU */
+    transform: translateX(0);
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -1117,4 +1121,91 @@ body.light-mode .modal {
     font-size: 3.2rem;
     color: var(--tiptitle);
     line-height: 5rem;
+}
+
+.copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    color: #75726e;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 3rem;
+}
+
+.cp1 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--copyright);
+}
+
+.cp2 {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.cp2-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.cp2 {
+    font-size: 0.9rem;
+    color: var(--text);
+    text-align: center;
+}
+
+.tooltip-card {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    background: var(--copyright-bg);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.5);
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.cp2-wrapper:hover .tooltip-card {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+.tooltip-card h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #e5d6b4;
+}
+
+.tooltip-card p {
+    margin: 0.2rem 0;
+}
+
+.tooltip-card .tooltip-note {
+    font-size: 0.75rem;
+    color: #bbb;
+}
+
+.tooltip-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(99,102,241,0.1), rgba(168,85,247,0.1));
+    filter: blur(20px);
+    border-radius: 16px;
+    pointer-events: none;
+    opacity: 0.4;
 }
